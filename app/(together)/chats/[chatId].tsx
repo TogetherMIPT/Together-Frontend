@@ -1,40 +1,59 @@
-import { ChatInput } from "@/components/screens/Chat/ChatInput";
-import { Message } from "@/components/screens/Chat/Message";
-import { useFetchChatById } from "@/hooks/data/useFetchChatById";
-import { IChat } from "@/types/chat";
-import { IMessage } from "@/types/message";
-import { useLocalSearchParams } from "expo-router";
-import { FlatList, ListRenderItem, StyleSheet } from "react-native";
+import { ChatInput } from '@/components/screens/Chat/ChatInput';
+import { Message } from '@/components/screens/Chat/Message';
+import { Colors } from '@/constants/Colors';
+import { useFetchChatById } from '@/hooks/data/useFetchChatById';
+import { IMessage } from '@/types/message';
+import { useLocalSearchParams } from 'expo-router';
+import { useRef } from 'react';
+import {
+  FlatList,
+  StyleSheet,
+  ListRenderItem,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const keyExtractor = (item: IMessage) => item.message_id;
-
-const renderItem: ListRenderItem<IMessage> = ({ item }) => <Message message={item} />
-
-export default function ChatScreen() {
-  const { chatId } = useLocalSearchParams<{ chatId: IChat['chat_id'] }>();
+export const AIChatScreen = () => {
+  const { chatId } = useLocalSearchParams<{ chatId: string }>();
   const { data: messages } = useFetchChatById(chatId);
+  const flatListRef = useRef<FlatList>(null);
+
+  const handleSend = (text: string) => {
+    console.log('sent', text);
+    flatListRef.current?.scrollToEnd({ animated: true });
+  };
+
+  const renderMessage: ListRenderItem<IMessage> = ({ item }) => (
+    <Message message={item} />
+  );
 
   return (
-    <SafeAreaView style={styles.list} edges={['top', 'left', 'right', 'bottom']}>
-      <FlatList
+    <SafeAreaView style={styles.container} edges={['bottom']}>
+      <FlatList<IMessage>
+        ref={flatListRef}
         data={messages}
-        renderItem={renderItem}
-        keyExtractor={keyExtractor}
-        contentContainerStyle={styles.container}
-        style={styles.list}
+        renderItem={renderMessage}
+        keyExtractor={item => item.message_id}
+        contentContainerStyle={styles.messagesList}
+        onContentSizeChange={() =>
+          flatListRef.current?.scrollToEnd({ animated: true })
+        }
+        onLayout={() => flatListRef.current?.scrollToEnd({ animated: false })}
       />
-      <ChatInput onSend={() => {}} />
+
+      <ChatInput onSend={handleSend} />
     </SafeAreaView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-  list: {
-    flex: 1,
-  },
   container: {
     flex: 1,
-    gap: 8,
-  }
-})
+    backgroundColor: Colors.lightGrey,
+  },
+  messagesList: {
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+  },
+});
+
+export default AIChatScreen;
