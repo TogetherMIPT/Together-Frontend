@@ -1,0 +1,1 @@
+export const checkIsEmailValid = (email: string) => !/\S+@\S+\.\S+/.test(email)
