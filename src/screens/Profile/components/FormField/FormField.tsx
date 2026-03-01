@@ -9,10 +9,9 @@ interface IProps {
   type: string;
   placeholder?: string;
   onChange: Dispatch<SetStateAction<Partial<EditableClientFields> | undefined>>;
-  disabled: boolean;
 }
 
-export const FormField: FC<IProps> = ({ title, name, value, placeholder, onChange, disabled }) => {
+export const FormField: FC<IProps> = ({ title, name, value, placeholder, onChange }) => {
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     onChange((prev) => ({ ...prev, [name]: e.target.value }))
   }
@@ -26,7 +25,6 @@ export const FormField: FC<IProps> = ({ title, name, value, placeholder, onChang
         value={value}
         onChange={handleChange}
         placeholder={placeholder}
-        disabled={disabled}
       />
     </FormGroup>
   );

@@ -4,7 +4,7 @@ export const StyledWrapper = styled('div')`
   display: flex;
   justify-content: space-between;
   
-  background-color: #242424;
+  background-color: #ffffff;
   width: 100%;
   position: sticky;
   top: 0;

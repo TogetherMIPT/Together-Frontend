@@ -10,6 +10,6 @@ export const StyledChatControls = styled('div')`
   flex-basis: 20px;
   position: sticky;
   top: 0;
-  background-color: #242424;
+  background-color: #ffffff;
   z-index: 1000;
 `;
