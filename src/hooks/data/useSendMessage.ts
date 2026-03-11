@@ -15,7 +15,7 @@ export const useSendMessage = (chatId?: string) => {
         [QueryKeys.chat, chatId],
         (prevData: AxiosResponse<IChatResponse>) => {
           const userMessage: IMessage = {
-            message_id: 0,
+            message_id: Date.now(),
             chat_id: +(chatId || 0),
             created_at: new Date().toISOString(),
             message_text: message,
@@ -39,7 +39,7 @@ export const useSendMessage = (chatId?: string) => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QueryKeys.chat, chatId]
-      })
+      });
     },
   });
 }
