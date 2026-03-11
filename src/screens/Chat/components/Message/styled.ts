@@ -25,10 +25,6 @@ export const OutgoingMessage = styled<TMessageStyled>(MessageBase)`
 // Контент сообщения
 export const MessageContent = styled('div')`
   padding: 12px 16px;
-  position: relative;
-  line-height: 1.4;
-  word-wrap: break-word;
-  white-space: pre-wrap;
 `;
 
 // Время сообщения

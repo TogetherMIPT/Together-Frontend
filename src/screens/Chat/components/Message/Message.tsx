@@ -1,4 +1,7 @@
 import { memo, type FC, type PropsWithChildren } from "react";
+
+import Markdown from 'react-markdown'
+
 import type { IMessage } from "../../../../types/message";
 import { IncomingMessage, OutgoingMessage, MessageContent, MessageTime } from "./styled";
 
@@ -22,7 +25,9 @@ export const Message: FC<IProps> = memo(({
   return (
     <MessageWrapper isOutgoing={is_from_user}>
       <MessageContent>
-        {message_text}
+        <Markdown>
+          {message_text}
+        </Markdown>
       </MessageContent>
       <MessageTime>{displayTime}</MessageTime>
     </MessageWrapper>
