@@ -16,14 +16,6 @@ export const StyledChatWrapper = styled('div')`
   flex-direction: column;
   margin-bottom: 93px;
 `
-// Обёртка для сообщений
-export const MessagesWrapper = styled.div`
-  width: 100vw;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`
 
 export const StyledTextInputWrapper = styled('div')`
   display: flex;

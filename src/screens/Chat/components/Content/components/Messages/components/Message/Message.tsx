@@ -2,7 +2,7 @@ import { memo, type FC, type PropsWithChildren } from "react";
 
 import Markdown from 'react-markdown'
 
-import type { IMessage } from "../../../../types/message";
+import type { IMessage } from "../../../../../../../../types/message";
 import { IncomingMessage, OutgoingMessage, MessageContent, MessageTime } from "./styled";
 
 interface IProps {
