@@ -1,7 +1,9 @@
 import { useState, type ChangeEventHandler, type SubmitEventHandler } from 'react';
-import { Button, Error, Form, FormGroup, Input, Label, Success } from "./styled";
+import { Form, Success } from "./styled";
 import { useRegister } from '../../../../hooks/data/useRegister';
 import type { TRegistrationFormData } from '../../../../types/app/registrationFormData';
+import { Button } from '../../../../components/Button';
+import { FormInput } from '../../../../components/FormInput';
 
 type TExtendedRegisterFormData = TRegistrationFormData & { confirmPassword: string }
 
@@ -12,7 +14,7 @@ export const RegisterForm = () => {
     confirmPassword: ''
   });
   const [errors, setErrors] = useState<Partial<TExtendedRegisterFormData>>({});
-  const { mutateAsync: register, isSuccess } = useRegister();
+  const { mutateAsync: register, isSuccess, isPending } = useRegister();
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
@@ -67,49 +69,40 @@ export const RegisterForm = () => {
     <Form onSubmit={handleSubmit}>
       {isSuccess && <Success>Регистрация выполнена успешно!</Success>}
 
-      <FormGroup>
-        <Label htmlFor="email">Email</Label>
-        <Input
-          type="email"
-          id="login"
-          name="login"
-          placeholder="Введите ваш login"
-          value={formData.login}
-          onChange={handleChange}
-          required
-        />
-        {errors.login && <Error>{errors.login}</Error>}
-      </FormGroup>
+      <FormInput
+        type="email"
+        id="login"
+        name="login"
+        placeholder="Введите ваш email"
+        value={formData.login}
+        onChange={handleChange}
+        required
+        error={errors.login}
+      />
 
-      <FormGroup>
-        <Label htmlFor="password">Пароль</Label>
-        <Input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Введите пароль"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        {errors.password && <Error>{errors.password}</Error>}
-      </FormGroup>
+      <FormInput
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Введите пароль"
+        value={formData.password}
+        onChange={handleChange}
+        required
+        error={errors.password}
+      />
 
-      <FormGroup>
-        <Label htmlFor="confirmPassword">Подтвердите пароль</Label>
-        <Input
-          type="password"
-          id="confirmPassword"
-          name="confirmPassword"
-          placeholder="Повторите пароль"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          required
-        />
-        {errors.confirmPassword && <Error>{errors.confirmPassword}</Error>}
-      </FormGroup>
+      <FormInput
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        placeholder="Повторите пароль"
+        value={formData.confirmPassword}
+        onChange={handleChange}
+        required
+        error={errors.confirmPassword}
+      />
 
-      <Button type="submit">Зарегистрироваться</Button>
+      <Button type="submit" isLoading={isPending}>Зарегистрироваться</Button>
     </Form>
   );
 };

@@ -1,8 +1,10 @@
 import { type ChangeEventHandler, type SubmitEventHandler, useState } from 'react';
-import { Button, Error, Form, FormGroup, Input, Label, Success } from "./styled";
+import { Form, Success } from "./styled";
 import { useLogin } from "../../../../hooks/data/useLogin";
 import type { TFormData } from "../../../../types/app/loginFormData";
 import { checkIsEmailValid } from "../../../../utils";
+import { Button } from '../../../../components/Button';
+import { FormInput } from '../../../../components/FormInput';
 
 export const LoginForm = () => {
   const [formData, setFormData] = useState<TFormData>({
@@ -10,7 +12,7 @@ export const LoginForm = () => {
     password: ''
   });
   const [errors, setErrors] = useState<Partial<TFormData>>({});
-  const { mutateAsync, isSuccess } = useLogin();
+  const { mutateAsync, isSuccess, isPending } = useLogin();
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
@@ -53,35 +55,29 @@ export const LoginForm = () => {
     <Form onSubmit={handleSubmit}>
       {isSuccess && <Success>Вход выполнен успешно!</Success>}
 
-      <FormGroup>
-        <Label htmlFor="email">Email</Label>
-        <Input
-          type="email"
-          id="login"
-          name="login"
-          placeholder="Введите ваш login"
-          value={formData.login}
-          onChange={handleChange}
-          required
-        />
-        {errors.login && <Error>{errors.login}</Error>}
-      </FormGroup>
+      <FormInput
+        type="email"
+        id="login"
+        name="login"
+        placeholder="Введите ваш email"
+        value={formData.login}
+        onChange={handleChange}
+        required
+        error={errors.login}
+      />
 
-      <FormGroup>
-        <Label htmlFor="password">Пароль</Label>
-        <Input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Введите пароль"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        {errors.password && <Error>{errors.password}</Error>}
-      </FormGroup>
+      <FormInput
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Введите пароль"
+        value={formData.password}
+        onChange={handleChange}
+        required
+        error={errors.password}
+      />
 
-      <Button type="submit">Войти</Button>
+      <Button type="submit" isLoading={isPending}>Войти</Button>
     </Form>
   );
 };
