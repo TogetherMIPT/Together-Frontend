@@ -1,6 +1,7 @@
 import { Text } from '../../../../../../components/Text';
-import { NewMessage, ContentWrapper } from './styled';
+import { ContentWrapper } from './styled';
 import { useCreateChatAndSendMessage } from '../../../../../../hooks/data/useCreateChatAndSendMessage';
+import { NewMessage } from './components/NewMessage';
 
 const firstMessages = [
   'Мне нужен совет',
@@ -11,16 +12,24 @@ const firstMessages = [
 ]
 
 export const EmptyChat = () => {
-  const send = useCreateChatAndSendMessage();
+  const { createAndSend, isPending } = useCreateChatAndSendMessage();
 
   const sendMessage = (message: string) => () => {
-    send(message);
+    createAndSend(message);
   }
   
   return (
     <ContentWrapper>
       <Text>Привет! Расскажи, чем бы ты хотел сегодня поделиться</Text>
-      {firstMessages.map((message) => <NewMessage onClick={sendMessage(message)}>{message}</NewMessage>)}
+      {firstMessages.map((message) => (
+        <NewMessage
+          key={message}
+          isLoading={isPending}
+          onClick={sendMessage(message)}
+        >
+          {message}
+        </NewMessage>
+        ))}
     </ContentWrapper>
   );
 }

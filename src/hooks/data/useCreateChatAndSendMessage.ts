@@ -6,11 +6,11 @@ import { useDeleteChat } from "./useDeleteChat";
 
 export const useCreateChatAndSendMessage = () => {
   const navigate = useNavigate();
-  const { mutateAsync: sendMessage } = useSendMessage();
-  const { mutateAsync: createChat } = useCreateChat();
-  const { mutateAsync: deleteChat } = useDeleteChat();
+  const { mutateAsync: sendMessage, isPending: isPendingSend } = useSendMessage();
+  const { mutateAsync: createChat, isPending: isPendingCreate } = useCreateChat();
+  const { mutateAsync: deleteChat, isPending: isPendingDelete } = useDeleteChat();
 
-  return useCallback(async (message: string) => {
+  const createAndSend = useCallback(async (message: string) => {
     const chatResponse = await createChat();
     const chat_id = +chatResponse?.data?.chat_id
     try {
@@ -27,4 +27,9 @@ export const useCreateChatAndSendMessage = () => {
       }
     }
   }, [])
+
+  return {
+    createAndSend,
+    isPending: isPendingCreate || isPendingDelete || isPendingSend,
+  };
 }

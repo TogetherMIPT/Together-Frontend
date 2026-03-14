@@ -1,4 +1,3 @@
-// Styled Components
 import styled from "styled-components";
 
 export const ProfileContainer = styled.div`
@@ -38,37 +37,6 @@ export const ButtonGroup = styled.div`
   margin-top: 30px;
 `;
 
-export const Button = styled.button<{ primary?: boolean; fullWidth?: boolean }>`
-  flex: ${(props) => (props.fullWidth ? '1' : 'none')};
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-  background: ${(props) =>
-  props.primary
-    ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-    : '#e0e0e0'};
-  color: ${(props) => (props.primary ? 'white' : '#333')};
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-  }
-`;
-
 export const Notification = styled.div<{ type: 'success' | 'error' }>`
   position: fixed;
   top: 20px;
@@ -98,6 +66,7 @@ export const Notification = styled.div<{ type: 'success' | 'error' }>`
 `;
 
 export const PageWrapper = styled.div`
+  width: 100vw;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

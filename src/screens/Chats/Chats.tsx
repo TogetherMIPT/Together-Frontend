@@ -2,8 +2,8 @@ import { useFetchChats } from "../../hooks/data/useFetchChats";
 import { Chat } from "./components/Chat";
 import { ContentWrapper, PageWrapper } from "./styled";
 import { Header } from "./components/Header";
-import { Button } from "../Profile/styled";
 import { useCreateChat } from "../../hooks/data/useCreateChat";
+import { Button } from "../../components/Button";
 
 export const Chats = () => {
   const { data = [] } = useFetchChats();

@@ -1,6 +1,5 @@
 import { type FC, type SubmitEventHandler, useCallback, useEffect, useState } from 'react';
 import {
-  Button,
   ButtonGroup,
   Notification,
   PageWrapper,
@@ -17,6 +16,7 @@ import { useUpdateProfile } from '../../hooks/data/useUpdateProfile';
 import { useFetchProfileById } from '../../hooks/data/useFetchProfileById';
 import { BackButton } from '../../components/BackButton';
 import { useLogout } from '../../hooks/data/useLogout';
+import { Button } from '../../components/Button';
 
 export const Profile: FC = () => {
   const { data, isSuccess } = useFetchProfileById();
@@ -25,7 +25,6 @@ export const Profile: FC = () => {
 
   useEffect(() => {
     if (!profile && isSuccess && data?.data) {
-      console.log('update profile', data.data.birthdate ? data.data.birthdate.split('T')?.[0] : undefined)
       setProfile({
         ...data.data,
         birthdate: data.data.birthdate ? data.data.birthdate.split('T')?.[0] : undefined
@@ -93,10 +92,10 @@ export const Profile: FC = () => {
             ))}
             
             <ButtonGroup>
-              <Button type="submit" primary fullWidth disabled={isPending}>
+              <Button type="submit" disabled={isPending}>
                 {isPending ? 'Сохранение...' : 'Сохранить изменения'}
               </Button>
-              <Button type="button" onClick={logout} fullWidth>
+              <Button type="button" variant="danger" onClick={logout}>
                 Выйти
               </Button>
             </ButtonGroup>

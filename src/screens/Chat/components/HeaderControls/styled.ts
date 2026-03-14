@@ -4,7 +4,7 @@ export const StyledChatControls = styled('div')`
   padding: 16px 20px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   gap: 4px;
   flex-basis: 20px;
