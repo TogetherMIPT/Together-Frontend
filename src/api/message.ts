@@ -1,4 +1,7 @@
-import type { IMessage } from "../types/message";
+import type { IMessageRequestParams } from "../types/message";
 import api from "../utils/api";
 
-export const sendMessage = (body: IMessageRequestParams) => api.post(`/api/message`, body);
+export const sendMessage = (body: IMessageRequestParams) => {
+  console.log('send message', body)
+  return api.post(`/api/message`, body)
+};

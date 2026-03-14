@@ -5,40 +5,41 @@ import type { AxiosResponse } from "axios";
 import { QueryKeys } from "../../constants/QueryKeys";
 import type { IChatResponse } from "../../types/chat";
 
-export const useSendMessage = (chatId?: string) => {
+export const useSendMessage = () => {
   const queryClient = useQueryClient();
   
   return useMutation<AxiosResponse<IMessage>, DefaultError, IMessageRequestParams>({
     mutationFn: sendMessage,
-    onMutate: ({ message }) => {
+    onMutate: ({ message, chat_id }) => {
       queryClient.setQueryData(
-        [QueryKeys.chat, chatId],
+        [QueryKeys.chat, chat_id],
         (prevData: AxiosResponse<IChatResponse>) => {
           const userMessage: IMessage = {
             message_id: Date.now(),
-            chat_id: +(chatId || 0),
+            chat_id: +(chat_id || 0),
             created_at: new Date().toISOString(),
             message_text: message,
             is_from_user: true,
           };
 
-          return ({
-          ...prevData,
-          data: {
-            ...prevData.data,
-            messages: [
-              userMessage,
-              ...prevData?.data?.messages,
-            ]
-          }
-        })}
+          if (prevData)
+            return ({
+              ...prevData,
+              data: {
+                ...prevData?.data,
+                messages: [
+                  userMessage,
+                  ...prevData?.data?.messages,
+                ]
+              }
+            })}
       );
 
       return message;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [QueryKeys.chat, chatId]
+        queryKey: [QueryKeys.chat]
       });
     },
   });

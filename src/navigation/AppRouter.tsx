@@ -11,7 +11,7 @@ export const AppRouter = () => {
       <Route path="/register" element={<AuthContainer active="register"/>}/>
       <Route path="/login" element={<AuthContainer active="login"/>}/>
       
-      <Route index path="/chat/:chat_id" element={<ProtectedRoute><Chat/></ProtectedRoute>}/>
+      <Route index path="/chat/:chat_id?" element={<ProtectedRoute><Chat/></ProtectedRoute>}/>
       <Route index path="/profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
       <Route index path="/" element={<ProtectedRoute><Chats/></ProtectedRoute>}/>
       

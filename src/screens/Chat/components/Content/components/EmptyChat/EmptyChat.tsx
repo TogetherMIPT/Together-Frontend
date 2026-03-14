@@ -1,7 +1,6 @@
-import { useParams } from 'react-router';
 import { Text } from '../../../../../../components/Text';
-import { useSendMessage } from '../../../../../../hooks/data/useSendMessage';
 import { NewMessage, ContentWrapper } from './styled';
+import { useCreateChatAndSendMessage } from '../../../../../../hooks/data/useCreateChatAndSendMessage';
 
 const firstMessages = [
   'Мне нужен совет',
@@ -12,16 +11,10 @@ const firstMessages = [
 ]
 
 export const EmptyChat = () => {
-  const { chat_id } = useParams<{ chat_id: string }>();
-  const { mutate } = useSendMessage(chat_id);
+  const send = useCreateChatAndSendMessage();
 
   const sendMessage = (message: string) => () => {
-    if (chat_id !== undefined) {
-      mutate({
-        message,
-        chat_id: +chat_id,
-      });
-    }
+    send(message);
   }
   
   return (

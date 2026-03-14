@@ -7,7 +7,7 @@ import { QueryKeys } from "../../constants/QueryKeys";
 export const useDeleteChat = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<AxiosResponse<IChat>, DefaultError, string>({
+  return useMutation<AxiosResponse<IChat>, DefaultError, number>({
     mutationFn: deleteChat,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QueryKeys.chats] });

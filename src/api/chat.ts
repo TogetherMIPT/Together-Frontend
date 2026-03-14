@@ -7,4 +7,4 @@ export const getChatMessages = (chatId: string) => api.get<IChatResponse>(`/api/
 
 export const createChat = (userId: number) => api.post(`/api/chat/${userId}`);
 
-export const deleteChat = (chatId: string) => api.delete(`/api/chat/${chatId}`);
+export const deleteChat = (chatId: number) => api.delete(`/api/chat/${chatId}`);
