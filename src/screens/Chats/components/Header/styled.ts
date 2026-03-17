@@ -15,3 +15,10 @@ export const StyledWrapper = styled('div')`
 
   zIndex: 1000;
 `
+
+export const ActionsWrapper = styled('div')`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+`;
