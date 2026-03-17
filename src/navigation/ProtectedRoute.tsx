@@ -1,16 +1,12 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import type { FC, PropsWithChildren } from 'react';
+import { type FC, type PropsWithChildren } from 'react';
 import { useAuthContext } from '../context/auth/AuthContext';
 
 export const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
-  const { isAuthenticated, isLoading } = useAuthContext();
+  const { userId } = useAuthContext();
   const location = useLocation();
 
-  if (isLoading) {
-    return <div>Загрузка...</div>;
-  }
-
-  if (!isAuthenticated) {
+  if (!userId) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 

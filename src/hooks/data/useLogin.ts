@@ -17,7 +17,9 @@ export const useLogin = () => {
     onSuccess: (res: AxiosResponse<TLoginResponse>) => {
       const { user_id, token } = res.data;
           
+      console.log(user_id);
       authStorage.setToken(token);
+      authStorage.setUserId(user_id);
       setUserId(user_id);
       setIsAuthenticated(true);
 

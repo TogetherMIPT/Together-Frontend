@@ -1,10 +1,8 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import type { Dispatch, FC, PropsWithChildren, SetStateAction } from "react";
 import { authStorage } from '../../utils/auth';
-import { useAuth } from "../../hooks/data/useAuth";
 
 interface IAuthContext {
-  isLoading: boolean;
   userId?: number;
   setUserId: Dispatch<SetStateAction<number | undefined>>;
   isAuthenticated: boolean;
@@ -12,7 +10,6 @@ interface IAuthContext {
 }
 
 const initialValue: IAuthContext = {
-  isLoading: false,
   isAuthenticated: false,
   setUserId: () => {},
   setIsAuthenticated: () => {},
@@ -21,35 +18,30 @@ const initialValue: IAuthContext = {
 const AuthContext = createContext<IAuthContext>(initialValue);
 
 export const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [userId, setUserId] = useState<number>();
+  const user_id = authStorage.getUserId();
+  const [userId, setUserId] = useState<number | undefined>(user_id ? +user_id : undefined);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const { mutateAsync, isPending } = useAuth();
 
   // Восстановление сессии при загрузке
   useEffect(() => {
-    const initAuth = async () => {
-      const token = authStorage.getToken();
-      
-      if (token) {
-          // Проверяем валидность токена
-          await mutateAsync();
-      }
-    };
-
-    initAuth();
+    const user_id = authStorage.getUserId();
+    
+    if (user_id) {
+      setUserId(+user_id);
+      setIsAuthenticated(true);
+    }
   }, []);
 
   const value = useMemo(() => ({
     userId,
     isAuthenticated,
-    isLoading: isPending,
     setIsAuthenticated,
     setUserId,
-  }), [userId, isAuthenticated, isPending, setUserId, setIsAuthenticated]);
+  }), [userId, isAuthenticated, setUserId, setIsAuthenticated]);
 
   return (
     <AuthContext.Provider value={value}>
-      {!isPending && children}
+      {children}
     </AuthContext.Provider>
   );
 };
