@@ -1,4 +1,4 @@
-import { FC, useCallback } from "react";
+import { type FC, useCallback } from "react";
 import type { IChat } from "../../../../types/chat";
 import { Text } from "../../../../components/Text";
 import { useNavigate } from "react-router";
@@ -24,8 +24,10 @@ export const Chat: FC<IProps> = ({ chat }) => {
     }
   }, [chat?.chat_id])
 
-  return <StyledWrapper onClick={handleClick}>
-    <Text>{chat.chat_name}</Text>
-    <DeleteButton onClick={onDelete} />
-  </StyledWrapper>
+  return (
+    <StyledWrapper onClick={handleClick}>
+      <Text>{chat.chat_name}</Text>
+      <DeleteButton onClick={onDelete} />
+    </StyledWrapper>
+  );
 }

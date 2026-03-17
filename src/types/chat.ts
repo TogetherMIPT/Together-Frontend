@@ -8,6 +8,10 @@ export interface IChat {
   is_active: string;
 }
 
+export interface IRenameChatBody {
+  chat_name: string;
+}
+
 export interface IChatsResponse {
   chats: IChat[];
   total: number;
