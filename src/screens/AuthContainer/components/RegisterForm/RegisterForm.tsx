@@ -70,6 +70,7 @@ export const RegisterForm = () => {
       {isSuccess && <Success>Регистрация выполнена успешно!</Success>}
 
       <FormInput
+        label="Email"
         type="email"
         id="login"
         name="login"
@@ -81,6 +82,7 @@ export const RegisterForm = () => {
       />
 
       <FormInput
+        label="Пароль"
         type="password"
         id="password"
         name="password"
@@ -92,6 +94,7 @@ export const RegisterForm = () => {
       />
 
       <FormInput
+        label="Повторите пароль"
         type="password"
         id="confirmPassword"
         name="confirmPassword"

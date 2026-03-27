@@ -1,4 +1,4 @@
-import type { FC } from "react"
+import { memo, type FC } from "react"
 import type { IMessage } from "../../../../types/message"
 import { Messages } from "./components/Messages";
 import { EmptyChat } from "./components/EmptyChat";
@@ -7,10 +7,10 @@ interface IProps {
   messages: IMessage[];
 }
 
-export const Content: FC<IProps> = ({
+export const Content: FC<IProps> = memo(({
   messages
 }) => {
   if (!messages.length) return <EmptyChat />
 
   return <Messages messages={messages} />
-}
+});

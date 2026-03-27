@@ -4,6 +4,7 @@ export { AnxietyMid } from './AnxietyMid';
 export { ControlHigh } from './ControlHigh';
 export { ControlMid } from './ControlMid';
 export { ControlLow } from './ControlLow';
+export { Graph } from './Graph';
 export { MoodGood } from './MoodGood';
 export { MoodNeutral } from './MoodNeutral';
 export { MoodBad } from './MoodBad';

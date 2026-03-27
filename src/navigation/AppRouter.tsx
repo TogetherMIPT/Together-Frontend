@@ -4,7 +4,8 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import { Chat } from "../screens/Chat";
 import { Profile } from "../screens/Profile";
 import { Chats } from "../screens/Chats";
-import { Survey } from "../screens/Survey/Survey";
+import { Survey } from "../screens/Survey";
+import { SurveyHistory } from "../screens/SurveyHistory";
 
 export const AppRouter = () => {
   return (
@@ -14,6 +15,7 @@ export const AppRouter = () => {
 
       <Route index path="/chat/:chat_id?" element={<ProtectedRoute><Chat/></ProtectedRoute>}/>
       <Route index path="/profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
+      <Route index path="/survey/history" element={<ProtectedRoute><SurveyHistory/></ProtectedRoute>}/>
       <Route index path="/survey" element={<ProtectedRoute><Survey/></ProtectedRoute>}/>
       <Route index path="/" element={<ProtectedRoute><Chats/></ProtectedRoute>}/>
 

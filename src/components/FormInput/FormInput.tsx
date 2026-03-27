@@ -2,10 +2,10 @@ import type { FC } from "react"
 import { Error, FormGroup, Input, Label } from "./styled"
 import type { FormInputProps } from "./types"
 
-export const FormInput: FC<FormInputProps> = ({ type, id, name, placeholder, value, onChange, required, error }) => {
+export const FormInput: FC<FormInputProps> = ({ type, id, label, name, placeholder, value, onChange, required, error }) => {
   return (
     <FormGroup>
-      <Label htmlFor={id}>Email</Label>
+      <Label htmlFor={id}>{label}</Label>
       <Input
         type={type}
         id={id}

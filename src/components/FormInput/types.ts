@@ -4,6 +4,7 @@ export interface FormInputProps {
   type: HTMLInputTypeAttribute;
   id: string;
   name: string;
+  label: string;
   placeholder: string;
   value: string | number | readonly string[] | undefined;
   onChange: ChangeEventHandler<HTMLInputElement, HTMLInputElement>;

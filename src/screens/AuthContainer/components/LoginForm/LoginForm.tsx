@@ -66,6 +66,7 @@ export const LoginForm = () => {
       {isSuccess && <Success>Вход выполнен успешно!</Success>}
 
       <FormInput
+        label="Email"
         type="email"
         id="login"
         name="login"
@@ -77,6 +78,7 @@ export const LoginForm = () => {
       />
 
       <FormInput
+        label="Пароль"
         type="password"
         id="password"
         name="password"

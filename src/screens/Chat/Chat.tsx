@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { useCallback, type FC } from "react";
 import { useParams } from "react-router";
 
 import { useFetchChatById } from "../../hooks/data/useFetchChatById";
@@ -8,7 +8,7 @@ import { ChatInput } from "./components/ChatInput";
 import { useSendMessage } from "../../hooks/data/useSendMessage";
 import { Content } from "./components/Content";
 import { useCreateChatAndSendMessage } from "../../hooks/data/useCreateChatAndSendMessage";
-import { HeaderControls } from "./components/HeaderControls";
+import { HeaderControls } from "../../components/HeaderControls";
 
 export const Chat: FC = () => {
   const { chat_id } = useParams<{ chat_id?: string }>();
@@ -17,7 +17,7 @@ export const Chat: FC = () => {
   const { createAndSend } = useCreateChatAndSendMessage();
   const { mutate } = useSendMessage();
 
-  const sendMessage = (message: string) => {
+  const sendMessage = useCallback((message: string) => {
     if (chat_id === undefined) {
       createAndSend(message);
     } else {
@@ -26,7 +26,7 @@ export const Chat: FC = () => {
         chat_id: +chat_id,
       });
     }
-  }
+  }, [chat_id, mutate, createAndSend])
 
   return (
     <PageWrapper>

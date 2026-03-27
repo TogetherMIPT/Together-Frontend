@@ -12,7 +12,7 @@ export const useSendMessage = () => {
     mutationFn: sendMessage,
     onMutate: ({ message, chat_id }) => {
       queryClient.setQueryData(
-        [QueryKeys.chat, chat_id],
+        [QueryKeys.chat, chat_id.toString()],
         (prevData: AxiosResponse<IChatResponse>) => {
           const userMessage: IMessage = {
             message_id: Date.now(),

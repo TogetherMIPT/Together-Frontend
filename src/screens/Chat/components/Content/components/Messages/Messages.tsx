@@ -1,4 +1,4 @@
-import { useEffect, useRef, type FC } from "react";
+import { memo, useEffect, useRef, type FC } from "react";
 import type { IMessage } from "../../../../../../types/message";
 import { MessagesWrapper } from "./styled";
 import { Message } from "./components/Message";
@@ -7,7 +7,7 @@ interface IProps {
   messages: IMessage[];
 }
 
-export const Messages: FC<IProps> = ({
+export const Messages: FC<IProps> = memo(({
   messages
 }) => {
   const messagesContainerRef = useRef<HTMLDivElement>(null);
@@ -32,4 +32,4 @@ export const Messages: FC<IProps> = ({
       {messages.slice().reverse().map((message) => (<Message key={message.message_id} message={message}/>))}
     </MessagesWrapper>
   );
-}
+});
