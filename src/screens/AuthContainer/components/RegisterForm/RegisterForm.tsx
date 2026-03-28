@@ -4,16 +4,21 @@ import { useRegister } from '../../../../hooks/data/useRegister';
 import type { TRegistrationFormData } from '../../../../types/app/registrationFormData';
 import { Button } from '../../../../components/Button';
 import { FormInput } from '../../../../components/FormInput';
+import { ConsentCheckbox } from './components/ConsentCheckbox';
 
-type TExtendedRegisterFormData = TRegistrationFormData & { confirmPassword: string }
-
-export const RegisterForm = () => {
-  const [formData, setFormData] = useState<TExtendedRegisterFormData>({
+const initialState = {
     login: '',
     password: '',
-    confirmPassword: ''
-  });
-  const [errors, setErrors] = useState<Partial<TExtendedRegisterFormData>>({});
+    confirmPassword: '',
+    agreeToPrivacy: false,
+  };
+
+type TExtendedRegisterFormData = TRegistrationFormData & { confirmPassword: string; agreeToPrivacy: boolean; }
+type TExtendedRegisterFormErrors = TRegistrationFormData & { confirmPassword: string; agreeToPrivacy: string; }
+
+export const RegisterForm = () => {
+  const [formData, setFormData] = useState<TExtendedRegisterFormData>(initialState);
+  const [errors, setErrors] = useState<Partial<TExtendedRegisterFormErrors>>({});
   const { mutateAsync: register, isSuccess, isPending } = useRegister();
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -23,7 +28,7 @@ export const RegisterForm = () => {
   };
 
   const validate = () => {
-    const newErrors: Partial<TExtendedRegisterFormData> = {};
+    const newErrors: Partial<TExtendedRegisterFormErrors> = {};
 
     if (!formData.login.trim()) {
       newErrors.login = 'Login обязателен';
@@ -39,6 +44,10 @@ export const RegisterForm = () => {
 
     if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = 'Пароли не совпадают';
+    }
+    
+    if (!formData.agreeToPrivacy) {
+      newErrors.agreeToPrivacy = 'Необходимо согласиться с политикой конфиденциальности';
     }
 
     return newErrors;
@@ -61,7 +70,8 @@ export const RegisterForm = () => {
     setFormData({
       login: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      agreeToPrivacy: false
     });
   };
 
@@ -105,7 +115,13 @@ export const RegisterForm = () => {
         error={errors.confirmPassword}
       />
 
-      <Button type="submit" isLoading={isPending}>Зарегистрироваться</Button>
+      <ConsentCheckbox
+        value={formData.agreeToPrivacy}
+        onChange={handleChange}
+        error={errors.agreeToPrivacy}
+      />
+
+      <Button type="submit" isLoading={isPending} disabled={!formData.agreeToPrivacy}>Зарегистрироваться</Button>
     </Form>
   );
 };
