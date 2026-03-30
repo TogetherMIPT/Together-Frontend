@@ -1,6 +1,7 @@
 export { AnxietyHigh } from './AnxietyHigh';
 export { AnxietyLow } from './AnxietyLow';
 export { AnxietyMid } from './AnxietyMid';
+export { CloseIcon } from './CloseIcon';
 export { ControlHigh } from './ControlHigh';
 export { ControlMid } from './ControlMid';
 export { ControlLow } from './ControlLow';

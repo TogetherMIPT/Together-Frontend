@@ -20,5 +20,5 @@ export const ActionsWrapper = styled('div')`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
 `;
