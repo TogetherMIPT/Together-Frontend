@@ -27,29 +27,29 @@ interface IQuestion {
 export const questions: IQuestion[] = [
   {
     id: 'mood_answer',
-    text: 'Как вы оцениваете свое эмоциональное состояние сегодня?',
+    text: 'Как вы чувствовали себя эмоционально сегодня?',
     options: [
-      { value: 1, label: 'Плохо', icon: MoodBad, color: '#ef4444' },
-      { value: 2, label: 'Нормально', icon: MoodNeutral, color: '#f59e0b' },
+      { value: 1, label: 'Очень тяжело', icon: MoodBad, color: '#ef4444' },
+      { value: 2, label: 'Скорее тяжело', icon: MoodNeutral, color: '#f59e0b' },
       { value: 3, label: 'Хорошо', icon: MoodGood, color: '#10b981' },
     ],
   },
   {
     id: 'anxiety_answer',
-    text: 'Насколько сильно вы чувствовали напряжение или тревогу?',
+    text: 'Насколько сильным было внутреннее напряжение сегодня?',
     options: [
-      { value: 1, label: 'Сильная тревога', icon: AnxietyHigh, color: '#ef4444' },
-      { value: 2, label: 'Умеренно', icon: AnxietyMid, color: '#f59e0b' },
-      { value: 3, label: 'Спокоен', icon: AnxietyLow, color: '#10b981' },
+      { value: 1, label: 'Очень сильное', icon: AnxietyHigh, color: '#ef4444' },
+      { value: 2, label: 'Заметное', icon: AnxietyMid, color: '#f59e0b' },
+      { value: 3, label: 'Почти не было', icon: AnxietyLow, color: '#10b981' },
     ],
   },
   {
     id: 'control_answer',
-    text: 'Насколько вы чувствовали контроль над своей жизнью и ситуациями?',
+    text: 'Насколько у вас сегодня было ощущение, что вы справляетесь с происходящим?',
     options: [
-      { value: 1, label: 'Потерян', icon: ControlLow, color: '#ef4444' },
-      { value: 2, label: 'Частично', icon: ControlMid, color: '#f59e0b' },
-      { value: 3, label: 'Полный контроль', icon: ControlHigh, color: '#10b981' },
+      { value: 1, label: 'Совсем не справляюсь', icon: ControlLow, color: '#ef4444' },
+      { value: 2, label: 'Скорее трудно', icon: ControlMid, color: '#f59e0b' },
+      { value: 3, label: 'Чувствую опору', icon: ControlHigh, color: '#10b981' },
     ],
   },
 ];
