@@ -1,10 +1,12 @@
 import { useState, type ChangeEventHandler, type SubmitEventHandler } from 'react';
-import { Form, Success } from "./styled";
+import { ErrorMessage, Form, Success } from "./styled";
 import { useRegister } from '../../../../hooks/data/useRegister';
 import type { TRegistrationFormData } from '../../../../types/app/registrationFormData';
 import { Button } from '../../../../components/Button';
 import { FormInput } from '../../../../components/FormInput';
 import { ConsentCheckbox } from './components/ConsentCheckbox';
+import type { AxiosError } from 'axios';
+import { validatePassword } from './utils/validatePassword';
 
 const initialState = {
     login: '',
@@ -16,10 +18,25 @@ const initialState = {
 type TExtendedRegisterFormData = TRegistrationFormData & { confirmPassword: string; agreeToPrivacy: boolean; }
 type TExtendedRegisterFormErrors = TRegistrationFormData & { confirmPassword: string; agreeToPrivacy: string; }
 
+const parseRegisterError = (error: AxiosError | null) => {
+  if (!error) {
+    return;
+  }
+
+  switch (error.status) {
+    case 409:
+      return 'Такой пользователь уже существует!';
+    default:
+      return 'Произошла ошибка!';
+  }
+}
+
 export const RegisterForm = () => {
   const [formData, setFormData] = useState<TExtendedRegisterFormData>(initialState);
   const [errors, setErrors] = useState<Partial<TExtendedRegisterFormErrors>>({});
-  const { mutateAsync: register, isSuccess, isPending } = useRegister();
+  const { mutateAsync: register, isSuccess, isPending, error } = useRegister();
+
+  const registrationError = parseRegisterError(error);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
@@ -37,9 +54,13 @@ export const RegisterForm = () => {
     }
 
     if (!formData.password) {
+      
       newErrors.password = 'Пароль обязателен';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Пароль должен быть не менее 6 символов';
+    } else {
+      const passwordError = validatePassword(formData.password);
+      if (passwordError) {
+        newErrors.password = passwordError
+      }
     }
 
     if (formData.password !== formData.confirmPassword) {
@@ -122,6 +143,8 @@ export const RegisterForm = () => {
       />
 
       <Button type="submit" isLoading={isPending} disabled={!formData.agreeToPrivacy}>Зарегистрироваться</Button>
+
+      {error && <ErrorMessage>{registrationError}</ErrorMessage>}
     </Form>
   );
 };

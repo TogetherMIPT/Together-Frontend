@@ -1,3 +1,3 @@
 import api from "../utils/api";
 
-export const logout = () => api.post('/auth/logout');
+export const logout = () => api.post('/api/logout');
