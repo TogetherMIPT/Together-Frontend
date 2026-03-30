@@ -50,6 +50,40 @@ export const TextContent = styled.div`
 export const ChartContainer = styled.div`
   height: 400px;
   width: 100%;
+  position: relative;
+
+  /* Убираем стандартный браузерный фокус у SVG */
+  svg {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+
+    &:focus {
+      outline: none !important;
+    }
+
+    &:focus-visible {
+      outline: none !important;
+    }
+  }
+
+  /* Убираем обводку у всех элементов Recharts */
+  .recharts-surface,
+  .recharts-wrapper,
+  .recharts-layer,
+  .recharts-line,
+  .recharts-curve,
+  .recharts-dot,
+  .recharts-active-dot {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Принудительно убираем outline при фокусе */
+  [tabindex="0"]:focus,
+  [tabindex="-1"]:focus {
+    outline: none !important;
+  }
 `;
 
 export const LoadingSpinner = styled.div`

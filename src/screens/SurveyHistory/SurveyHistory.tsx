@@ -55,7 +55,7 @@ export const SurveyHistory: FC = () => {
                 <LineChart data={chartData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
-                  <YAxis domain={[0, 5]} />
+                  <YAxis domain={[0, 3]} ticks={[0, 1, 2, 3]} />
                   <Tooltip />
                   <Legend />
                   <Line
