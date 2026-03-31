@@ -39,8 +39,8 @@ export const RegisterForm = () => {
   const registrationError = parseRegisterError(error);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    const { name, value, checked, type } = e.target;
+    setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
     setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
