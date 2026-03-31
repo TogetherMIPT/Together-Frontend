@@ -10,3 +10,10 @@ https://nodejs.org/en/download
 # Запуск приложения
 
 `npm run dev`
+
+
+# Deploy
+
+`npr run build`
+
+Заархивировать папку dist, закинуть ее на сервер, разархивировать, перенести index.html и assets в корень.
