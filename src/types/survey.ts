@@ -1,3 +1,16 @@
+export interface PostWelcomeSurveyBody {
+  user_id: number;
+  with_psychologist: boolean;
+  therapy_request: string;
+  therapy_approach: string;
+  weekly_meetings: number;
+}
+
+export interface PostWelcomeSurveyResponse {
+  client_survey_id: number;
+  message:  string;
+}
+
 export interface PostSurveyBody {
   user_id: number;
   mood_answer: number;

@@ -1,0 +1,1 @@
+export { WelcomeSurvey } from './WelcomeSurvey';

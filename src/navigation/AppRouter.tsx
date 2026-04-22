@@ -6,20 +6,24 @@ import { Profile } from "../screens/Profile";
 import { Chats } from "../screens/Chats";
 import { Survey } from "../screens/Survey";
 import { SurveyHistory } from "../screens/SurveyHistory";
+import { WelcomeSurvey } from "../screens/WelcomeSurvey";
 
 export const AppRouter = () => {
   return (
-    <Routes>
-      <Route path="/register" element={<AuthContainer active="register"/>}/>
-      <Route path="/login" element={<AuthContainer active="login"/>}/>
+    <>
+      <WelcomeSurvey />
+      <Routes>
+        <Route path="/register" element={<AuthContainer active="register"/>}/>
+        <Route path="/login" element={<AuthContainer active="login"/>}/>
 
-      <Route index path="/chat/:chat_id?" element={<ProtectedRoute><Chat/></ProtectedRoute>}/>
-      <Route index path="/profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
-      <Route index path="/survey/history" element={<ProtectedRoute><SurveyHistory/></ProtectedRoute>}/>
-      <Route index path="/survey" element={<ProtectedRoute><Survey/></ProtectedRoute>}/>
-      <Route index path="/" element={<ProtectedRoute><Chats/></ProtectedRoute>}/>
+        <Route index path="/chat/:chat_id?" element={<ProtectedRoute><Chat/></ProtectedRoute>}/>
+        <Route index path="/profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
+        <Route index path="/survey/history" element={<ProtectedRoute><SurveyHistory/></ProtectedRoute>}/>
+        <Route index path="/survey" element={<ProtectedRoute><Survey/></ProtectedRoute>}/>
+        <Route index path="/" element={<ProtectedRoute><Chats/></ProtectedRoute>}/>
 
-      <Route path="/" element={<AuthContainer active="login"/>}/>
-    </Routes>
+        <Route path="/" element={<AuthContainer active="login"/>}/>
+      </Routes>
+    </>
   );
 }
