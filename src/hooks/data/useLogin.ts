@@ -22,7 +22,7 @@ export const useLogin = () => {
       setUserId(user_id);
       setIsAuthenticated(true);
 
-      navigate('/chat/')
+      navigate('/chat/');
     }
   })
 }

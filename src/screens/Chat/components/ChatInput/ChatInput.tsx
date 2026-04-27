@@ -1,6 +1,5 @@
 import { useState, type FC, type KeyboardEventHandler } from 'react';
 import {
-  InputContainer,
   InputWrapper,
   MessageInput,
   SendButton
@@ -8,9 +7,10 @@ import {
 
 interface IProps {
   onSend: (message: string) => void;
+  placeholder?: string;
 }
 
-export const ChatInput: FC<IProps> = ({ onSend }) => {
+export const ChatInput: FC<IProps> = ({ onSend, placeholder = "Сообщение..." }) => {
   const [message, setMessage] = useState('');
   const [attachments, setAttachments] = useState([]);
 
@@ -30,13 +30,13 @@ export const ChatInput: FC<IProps> = ({ onSend }) => {
   };
 
   return (
-    <InputContainer>
+    <>
       <InputWrapper>
         <MessageInput
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Сообщение..."
+          placeholder={placeholder}
           rows={1}
         />
       </InputWrapper>
@@ -51,6 +51,6 @@ export const ChatInput: FC<IProps> = ({ onSend }) => {
           <polygon points="22 2 15 22 11 13 2 9 22 2" fill="currentColor"/>
         </svg>
       </SendButton>
-    </InputContainer>
+    </>
   );
 };

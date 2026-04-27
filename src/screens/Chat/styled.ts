@@ -23,3 +23,17 @@ export const StyledTextInputWrapper = styled('div')`
   position: fixed;
   bottom: 0;
 `
+
+export const InputContainer = styled.div`
+  background-color: #ffffff;
+  border-top: 1px solid #e0e0e0;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 12px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+  min-width: 100vw;
+  max-width: 100vw;
+`;

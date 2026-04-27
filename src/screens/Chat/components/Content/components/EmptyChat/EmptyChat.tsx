@@ -4,6 +4,7 @@ import { useCreateChatAndSendMessage } from '../../../../../../hooks/data/useCre
 import { NewMessage } from './components/NewMessage';
 import { useNavigate } from 'react-router';
 import { Button } from '../../../../../../components/Button';
+import { useCheckSurveyStatus } from '../../../../../../hooks/data/useCheckSurveyStatus';
 
 const firstMessages = [
   'Мне нужен совет',
@@ -16,6 +17,7 @@ const firstMessages = [
 export const EmptyChat = () => {
   const navigate = useNavigate();
   const { createAndSend, isPending } = useCreateChatAndSendMessage();
+  const { data: isSurveyCompleted } = useCheckSurveyStatus();
 
   const sendMessage = (message: string) => () => {
     createAndSend(message);
@@ -29,7 +31,7 @@ export const EmptyChat = () => {
     <ContentWrapper>
       
       <Text>Привет! Расскажи, чем бы ты хотел сегодня поделиться</Text>
-      <Button onClick={openSurvey}>Чек-ап настроения</Button>
+      <Button variant={isSurveyCompleted ? "secondary" : "primary"} onClick={openSurvey}>Чек-ап настроения</Button>
       {firstMessages.map((message) => (
         <NewMessage
           key={message}

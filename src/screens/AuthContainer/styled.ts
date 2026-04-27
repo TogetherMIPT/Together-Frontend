@@ -11,6 +11,7 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 20px;
   background: white;
+  margin: auto;
 `;
 
 export const AuthHeader = styled.div`

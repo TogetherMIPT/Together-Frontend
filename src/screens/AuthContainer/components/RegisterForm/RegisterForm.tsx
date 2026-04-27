@@ -7,6 +7,7 @@ import { FormInput } from '../../../../components/FormInput';
 import { ConsentCheckbox } from './components/ConsentCheckbox';
 import type { AxiosError } from 'axios';
 import { validatePassword } from './utils/validatePassword';
+import { useRedirectIfAuthenticated } from '../../hooks/useRedirectIfAuthenticated';
 
 const initialState = {
     login: '',
@@ -37,6 +38,8 @@ export const RegisterForm = () => {
   const { mutateAsync: register, isSuccess, isPending, error } = useRegister();
 
   const registrationError = parseRegisterError(error);
+
+  useRedirectIfAuthenticated();
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value, checked, type } = e.target;

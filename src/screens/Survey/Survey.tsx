@@ -20,15 +20,12 @@ import type { PostSurveyBody } from "../../types/survey";
 import { useSendSurvey } from "../../hooks/data/useSendSurvey";
 import { useAuthContext } from "../../context/auth/AuthContext";
 import { HeaderControls } from "../../components/HeaderControls";
-import { useGetSurveyResults } from "../../hooks/data/useGetSurveyResults";
 
 export const Survey = () => {
   const navigate = useNavigate()
   const { userId } = useAuthContext();
   const [answers, setAnswers] = useState<Partial<Omit<PostSurveyBody, 'user_id'>>>({});
   const { mutateAsync, isPending } = useSendSurvey();
-  const { data } = useGetSurveyResults();
-  console.log('survey results', data)
 
   const handleOptionSelect = (questionId: string, value: number) => {
     setAnswers((prev) => ({
@@ -47,7 +44,7 @@ export const Survey = () => {
         ...(answers as Omit<PostSurveyBody, 'user_id'>)
       });
 
-      navigate('/');
+      navigate('/survey/history');
     }
   };
 

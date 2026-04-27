@@ -7,6 +7,7 @@ import { Chats } from "../screens/Chats";
 import { Survey } from "../screens/Survey";
 import { SurveyHistory } from "../screens/SurveyHistory";
 import { WelcomeSurvey } from "../screens/WelcomeSurvey";
+import { Landing } from "../screens/Landing";
 
 export const AppRouter = () => {
   return (
@@ -20,9 +21,9 @@ export const AppRouter = () => {
         <Route index path="/profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
         <Route index path="/survey/history" element={<ProtectedRoute><SurveyHistory/></ProtectedRoute>}/>
         <Route index path="/survey" element={<ProtectedRoute><Survey/></ProtectedRoute>}/>
-        <Route index path="/" element={<ProtectedRoute><Chats/></ProtectedRoute>}/>
+        <Route index path="/chats" element={<ProtectedRoute><Chats/></ProtectedRoute>}/>
 
-        <Route path="/" element={<AuthContainer active="login"/>}/>
+        <Route path="/" element={<Landing />}/>
       </Routes>
     </>
   );

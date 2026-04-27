@@ -5,7 +5,7 @@ export const HomeButton: FC = () => {
   const navigate = useNavigate();
 
   const goHome = () => {
-    navigate('/');
+    navigate('/chats');
   }
 
   return <div onClick={goHome}>

@@ -21,7 +21,7 @@ export const useRegister = () => {
       setUserId(user_id);
       setIsAuthenticated(true);
 
-      navigate('/login')
+      navigate('/login');
       
       return user_id;
     },

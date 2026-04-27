@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { type FC } from "react";
 import {
   LoadingSpinner,
   ErrorBox,
@@ -8,14 +8,18 @@ import {
   Card,
   SectionTitle,
   ChartContainer,
-  TextContent
+  TextContent,
+  InputContainer,
 } from './styled';
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useGetSurveyResults } from "../../hooks/data/useGetSurveyResults";
 import { HeaderControls } from "../../components/HeaderControls";
+import { ChatInput } from "../Chat/components/ChatInput";
+import { useCreateChatAndSendMessage } from "../../hooks/data/useCreateChatAndSendMessage";
 
 export const SurveyHistory: FC = () => {
   const { data, isLoading, error } = useGetSurveyResults();
+  const { createAndSend } = useCreateChatAndSendMessage();
 
   if (isLoading) {
     return <LoadingSpinner>Загрузка данных опроса...</LoadingSpinner>;
@@ -84,10 +88,10 @@ export const SurveyHistory: FC = () => {
             </ChartContainer>
           </Card>
 
-          <Card>
+          {/* <Card>
             <SectionTitle>Рекомендации</SectionTitle>
             <TextContent>{data.recommendations}</TextContent>
-          </Card>
+          </Card> */}
         </div>
 
         {/* Правая колонка: Саммари */}
@@ -95,8 +99,11 @@ export const SurveyHistory: FC = () => {
           <Card>
             <SectionTitle>Анализ</SectionTitle>
             <TextContent>{data.summary}</TextContent>
+            <InputContainer>
+              <ChatInput onSend={createAndSend} placeholder="Есть вопросы?" />
+            </InputContainer>
           </Card>
-          
+
           {/* Дополнительная статистика (опционально) */}
           <Card style={{ background: '#f9f9f9' }}>
              <SectionTitle style={{ fontSize: '1.2rem' }}>Статистика</SectionTitle>

@@ -1,22 +1,21 @@
-import { type ChangeEventHandler, type SubmitEventHandler, useEffect, useState } from 'react';
+import { type ChangeEventHandler, type SubmitEventHandler, useState } from 'react';
 import { Form, Success } from "./styled";
 import { useLogin } from "../../../../hooks/data/useLogin";
 import type { TFormData } from "../../../../types/app/loginFormData";
 import { checkIsEmailValid } from "../../../../utils";
 import { Button } from '../../../../components/Button';
 import { FormInput } from '../../../../components/FormInput';
-import { useAuthContext } from '../../../../context/auth/AuthContext';
-import { useNavigate } from 'react-router';
+import { useRedirectIfAuthenticated } from '../../hooks/useRedirectIfAuthenticated';
 
 export const LoginForm = () => {
-  const { userId, isAuthenticated } = useAuthContext();
-  const navigate = useNavigate();
   const [formData, setFormData] = useState<TFormData>({
     login: '',
     password: ''
   });
   const [errors, setErrors] = useState<Partial<TFormData>>({});
   const { mutateAsync, isSuccess, isPending } = useLogin();
+
+  useRedirectIfAuthenticated();
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
@@ -54,12 +53,6 @@ export const LoginForm = () => {
 
     setFormData({ login: '', password: '' });
   };
-
-  useEffect(() => {
-    if (isAuthenticated && userId) {
-      navigate('/');
-    }
-  }, [userId, isAuthenticated])
 
   return (
     <Form onSubmit={handleSubmit}>

@@ -103,3 +103,9 @@ export const ErrorBox = styled.div`
   text-align: center;
   border: 1px solid #fab1a0;
 `;
+
+export const InputContainer = styled.div`
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+`;

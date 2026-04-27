@@ -1,4 +1,4 @@
-import privacyPolicyPdf from '../../../../../../assets/docs/politika_konfidencialnosti_psych_app.docx.pdf';
+import privacyPolicyPdf from '../../../../../../assets/docs/privacy_policy.pdf';
 import { PrivacyLink } from './styled';
 
 export const PrivacyPolicy = () => {

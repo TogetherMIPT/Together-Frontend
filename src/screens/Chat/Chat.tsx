@@ -2,7 +2,7 @@ import { useCallback, type FC } from "react";
 import { useParams } from "react-router";
 
 import { useFetchChatById } from "../../hooks/data/useFetchChatById";
-import { PageWrapper, StyledChatWrapper, StyledTextInputWrapper } from "./styled";
+import { PageWrapper, StyledChatWrapper, StyledTextInputWrapper, InputContainer } from "./styled";
 
 import { ChatInput } from "./components/ChatInput";
 import { useSendMessage } from "../../hooks/data/useSendMessage";
@@ -35,7 +35,9 @@ export const Chat: FC = () => {
         <Content messages={data} />
       </StyledChatWrapper>
       <StyledTextInputWrapper>
-        <ChatInput onSend={sendMessage} />
+        <InputContainer>
+          <ChatInput onSend={sendMessage} />
+        </InputContainer>
       </StyledTextInputWrapper>
     </PageWrapper>
   );
