@@ -1,7 +1,12 @@
+import type { FC } from 'react';
 import privacyPolicyPdf from '../../../../../../assets/docs/privacy_policy.pdf';
 import { PrivacyLink } from './styled';
 
-export const PrivacyPolicy = () => {
+interface IProps {
+  text?: string;
+}
+
+export const PrivacyPolicy: FC<IProps> = ({ text = 'Политика конфиденциальности' }) => {
   return (
     <PrivacyLink 
       href={privacyPolicyPdf}
@@ -9,7 +14,7 @@ export const PrivacyPolicy = () => {
       rel="noopener noreferrer"
       onClick={(e) => e.stopPropagation()}
     >
-      политикой конфиденциальности
+      {text}
     </PrivacyLink>
   )
 }

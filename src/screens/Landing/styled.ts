@@ -50,6 +50,8 @@ export const HeroSub = styled.p`
   color: #64748B;
   max-width: 680px;
   margin-bottom: 2rem;
+  margin-inline-end: auto;
+  margin-inline-start: auto;
 `;
 
 export const HeroActions = styled.div`
@@ -94,11 +96,12 @@ export const FeatureDesc = styled.p`
 `;
 
 // --- Steps ---
-export const Steps = styled.ol`
+export const Steps = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   counter-reset: step;
+  padding-inline-start: 0;
 `;
 
 export const Step = styled.li`
@@ -107,6 +110,7 @@ export const Step = styled.li`
   background: #FFFFFF;
   border-radius: 16px;
   border: 1px solid #E2E8F0;
+  list-style: none;
   &::before {
     counter-increment: step;
     content: counter(step);

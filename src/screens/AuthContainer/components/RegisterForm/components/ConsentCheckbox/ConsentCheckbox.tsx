@@ -23,7 +23,7 @@ export const ConsentCheckbox: FC<IProps> = ({
         />
         <ConsentText>
           Я ознакомлен и согласен с{' '}
-          <PrivacyPolicy />
+          <PrivacyPolicy text="политикой конфиденциальности" />
         </ConsentText>
       </ConsentLabel>
       {error && (

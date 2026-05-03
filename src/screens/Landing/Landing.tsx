@@ -25,6 +25,7 @@ import {
   Disclaimer,
 } from './styled';
 import { Button } from '../../components/Button';
+import { PrivacyPolicy } from '../AuthContainer/components/RegisterForm/components/PrivacyPolicy';
 
 // --- Data ---
 const features = [
@@ -144,6 +145,7 @@ export const Landing: FC = () => {
           <Disclaimer>
             Приложение не является медицинским устройством и не заменяет очную психотерапию или психиатрическую помощь. При острых состояниях обращайтесь к специалистам.
           </Disclaimer>
+          <PrivacyPolicy />
         </Container>
       </Footer>
     </main>
