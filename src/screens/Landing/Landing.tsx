@@ -141,7 +141,7 @@ export const Landing: FC = () => {
 
       <Footer>
         <Container>
-          <p>© {new Date().getFullYear()} MindTrack AI. Все права защищены.</p>
+          <p>© {new Date().getFullYear()} Together. Все права защищены.</p>
           <Disclaimer>
             Приложение не является медицинским устройством и не заменяет очную психотерапию или психиатрическую помощь. При острых состояниях обращайтесь к специалистам.
           </Disclaimer>
